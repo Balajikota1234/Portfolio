@@ -497,7 +497,7 @@ footer {
 
 #success-message {
     position: fixed;
-    bottom: 50px;
+    bottom: 55px;
     left: 50%;
     transform: translateX(-50%);
     background: rgb(3, 36, 154);
@@ -515,4 +515,65 @@ footer {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(-10px);
+}
+
+@media (max-width: 768px) {
+    .home-content h1 {
+        font-size: 40px;
+    }
+    .home-content h3 {
+        font-size: 24px;
+    }
+    .home-content p {
+        font-size: 14px;
+    }
+    .home-content .btn-box {
+        width: 300px;
+    }
+    .btn-box a {
+        font-size: 16px;
+    }
+    .home-sci {
+        bottom: 20px;
+    }
+    .home-sci a {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+    .home-img img {
+        width: 250px;
+        margin-left: 50%;
+        margin-top: 10%;
+    }
+    .about h2, .projects h2, .contact h2 {
+        font-size: 24px;
+    }
+    .skills h2 {
+        font-size: 24px;
+    }
+    .skills-container {
+        gap: 10px;
+    }
+    .skill {
+        font-size: 14px;
+    }
+    .projects-contact {
+        flex-direction: column;
+    }
+    .projects, .contact {
+        width: 100%;
+    }
+    .project-card {
+        width: 80%;
+    }
+    form input, form textarea {
+        width: 100%;
+    }
+    .profile{
+        display: none;
+    }
+    .navbar{
+        display: none;
+    }
 }

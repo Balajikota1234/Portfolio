@@ -10,7 +10,7 @@
 </head>
 <body>
     <header class="header">
-        <a href="#" class="logo">Welcome to My Portfolio.</a>
+        <a href="#" class="logo">Balaji's Portfolio.</a>
 
         <nav class="navbar">
             <a href="#home" class="active">Home</a>
@@ -28,7 +28,7 @@
             <p>Hi, I'm Balaji Kota, a passionate Computer Science graduate specializing in high-responsive, graphical, and mobile-friendly web development. With expertise in HTML, CSS, and JavaScript, I create visually stunning and performance-driven websites. Let's build something amazing together!</p>
             <div class="btn-box">
                 <a href="mailto:kotabalaji05@gmail.com">Hire me</a>
-                <a href="tel:7661088177">Let's Talk</a>
+                <a href="#" onclick="downloadResume()">Download Resume</a>
             </div>
         </div>
         <div class="home-sci">
@@ -39,13 +39,13 @@
         </div>
         <div class="home-img">
             <div class="img-container">
-            <img src="./Profile.jpg">
+            <img class="profile" src="./Profile.jpg">
             </div>
         </div>
     </section>
 
     <section id="about" class="about">
-        <h2>About Me</h2>
+        <h2>About Me</h2><br>
         <p>👋 Hi, I'm Balaji Kota, a passionate and results-driven Computer Science graduate with a strong foundation in web development, software engineering, and problem-solving. I specialize in building high-responsive, graphical, and mobile-friendly websites and applications using HTML, CSS, JavaScript, and modern frameworks.<br>
 
             🚀 With an 85% aggregate in my Bachelor's degree from Sri Balaji Degree College (Andhra University), I have a deep understanding of frontend and backend technologies. I am currently expanding my expertise in full-stack development.<br>
@@ -147,7 +147,15 @@
         document.querySelector(".success-message").addEventListener("click", function() {
     this.style.display = "none";
     });
-        </script>
+    function downloadResume() {
+            const link = document.createElement('a');
+            link.href = 'BK_RESUME.pdf';
+            link.download = 'BK_RESUME.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
 
 </body>
 </html>
