@@ -1,5 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
+body.scroll-lock {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+/* Custom Scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  width: 3px; /* vertical scrollbar width */
+  height: 8px; /* horizontal scrollbar height */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--main-color); /* track color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--second-bg-color); /* thumb color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bg-color); /* thumb hover color */
+}
+
+
 *{
     margin: 0;
     padding: 0;
@@ -355,6 +381,17 @@ html {
     z-index: -1;
 }
 
+.freeze-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent; /* or rgba(0,0,0,0) */
+  z-index: 9999;
+  pointer-events: all;
+}
+
 .about{
     display: flex;
     justify-content: center;
@@ -574,15 +611,171 @@ span{
     width: 65%;
 }
 
+.portfolio, .work-section {
+    padding: 2% 10% 10% 10%;
+}
+
+.portfolio-container{
+    padding-top: 5%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.work-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
+    height: 70vh;
+}
+
+.portfolio-details, .work-info {
+    display: none;
+}
+
+.portfolio-details.active, .work-info.active {
+    display: block;
+}
+
+.portfolio-box .numb, .work-info-box .work-num {
+    font-size: 5.8rem;
+    -webkit-text-stroke: .07rem white;
+    color: transparent;
+    line-height: 1;
+}
+
+.portfolio-box h3, .work-info-box h3 {
+    font-size: 4.3rem;
+    margin: .8rem 0 1rem;
+}
+
+.portfolio-box p, .work-info-box p {
+    font-size: 1.3rem;
+}
+
+.portfolio-box .tech, .work-info-box .tech-stack {
+    margin: 1rem 0;
+    color: var(--main-color);
+    border-bottom: .1rem solid white;
+    padding-bottom: 1.1rem;
+}
+
+.portfolio-box .live-github a, .work-info-box .work-links a {
+    position: relative;
+    display: inline-flex;
+    padding: .7rem;
+    font-size: 2.5rem;
+    color: white;
+    border-radius: 50%;
+    background-color: var(--secondary-bg);
+    text-decoration: none;
+    transition: .5s;
+}
+
+.portfolio-box .live-github a:hover, .work-info-box .work-links a:hover {
+    color: var(--main-color);
+}
+
+.portfolio-box .live-github a:first-child {
+    margin-right: 1.2rem;
+}
+
+.portfolio-box .live-github a:first-child i {
+    transform: rotate(135deg);
+}
+
+.portfolio-box .live-github a span, .work-info-box .work-links a span {
+    position: absolute;
+    top: -60%;
+    left: 50%;
+    transform: translateX(-50%) scale(.9);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    padding: .3rem .7rem;
+    border-radius: .3rem;
+    pointer-events: none;
+    background: white;
+    color: var(--bg-color);
+    opacity: 0;
+    transition: .1s;
+}
+
+.portfolio-box .live-github a:hover span, .work-info-box .work-links a:hover span {
+    top: -70%;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.portfolio-box .portfolio-carousel {
+    width: 100%;
+    height: 28em;
+    border-radius: 0.7rem;
+    overflow: hidden;
+}
+
+.portfolio-carousel .img-slide {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    gap: 2rem;
+    height: inherit;
+    transition: .5s;
+}
+
+.portfolio-carousel .img-item {
+    height: inherit;
+}
+
+.portfolio-carousel .img-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.7rem;
+}
+
+.portfolio-box .navigation, .work-info-box .work-nav{
+    text-align: right;
+    margin-top: 1rem;
+}
+
+.portfolio-box .navigation button, .work-info-box .work-nav button {
+    display: inline-flex;
+    padding: .2rem;
+    background: var(--bg-color);
+    border: .1rem solid var(--main-color);
+    border-radius: .6rem;
+    font-size: 2rem;
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.portfolio-box .navigation button.disabled, .work-info-box .work-nav button.disabled {
+    border-color: var(--secondary-bg);
+    color: var(--disable-color);
+}
+
+.portfolio-box .navigation .arrow-right {
+    margin-left: 1rem;
+}
+
+.work-section{
+    display: none;
+}
+
 .contact{
     min-height: auto;
     padding-bottom: 7rem;
-    margin: 0 5% 0 5%;
     display: flex;
     justify-content: space-between;
     gap: 40px;
     flex-wrap: wrap;
     padding: 60px 80px;
+    background-color: var(--second-bg-color);
+    padding: 3% 10% 5% 10%;
 }
 
 .contact-info{
@@ -653,6 +846,10 @@ span{
     resize: none;
 }
 
+.contact-info i{
+    color: white;
+}
+
 form button {
     background: #00abf0;
     color: #081b29;
@@ -673,7 +870,6 @@ form button:hover {
     align-items: center;
     flex-wrap: wrap;
     padding: 2rem 9%;
-    background: var(--second-bg-color);
 }
 
 .footer-text p{
@@ -689,6 +885,8 @@ form button:hover {
     background: var(--main-color);
     border: .2rem solid var(--main-color);
     border-radius: .6rem;
+    height: 40px;
+    width: 40px;
 }
 
 .short{
@@ -729,6 +927,12 @@ form button:hover {
 }
 
 @media (max-width: 768px) {
+    .btn-box{
+        gap: 10px;
+    }
+    .work-carousel{
+        display: none;
+    }
     .home-content .btn-box {
         width: 300px;
     }
@@ -736,8 +940,9 @@ form button:hover {
         bottom: 20px;
     }
     .home-sci a {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
+        padding: 20px;
     }
     .home-img img {
         width: 250px;
@@ -762,12 +967,18 @@ form button:hover {
     .footer-iconTop{
         display: none;
     }
+    .portfolio{
+        display: none;
+    }
     .full{
         display: none;
+    }
+    .work-section{
+        display: block;
     }
     .short{
         display: block;
         text-align: center;
-        margin-left: 40%;
+        padding-left: 40%;
     }
 }
